@@ -505,16 +505,6 @@ section.custom {
     height: 70%;
     position: relative;
     z-index: 1;
-    .marquee-info,
-    .marquee-info-cuero{
-      display: none;
-      height: 0;
-      overflow: hidden;
-      &.mostrar{
-        height: auto;
-        overflow: initial;
-      }
-    }
     h3 {
       color: #fff;
       font-family: var(--font-sparpanch);
@@ -1129,6 +1119,16 @@ section.custom {
   }
 }
 
+.marquee-info,
+.marquee-info-cuero{
+  display: none;
+  height: 0;
+  overflow: hidden;
+  &.mostrar{
+    height: auto;
+    //overflow: initial;
+  }
+}
 section.custom .contentMoto .part2 .item .inputSelect .cabecera img.flecha{
   display: none;
 }
@@ -1505,6 +1505,23 @@ body.pageFormulario {
   }
 }
 
+body.pageFormulario.gracias{
+  overflow: hidden;
+}
+
+body.pageFormulario.gracias{
+  main{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+body.pageFormulario .sectionFormulario{
+  height: 100%;
+}
+
 @media (max-width: 1600px){
   body.pageFormulario .sectionFormulario .huellas2 {
     right: 12px;
@@ -1537,7 +1554,7 @@ body.pageFormulario {
 
 @media (max-width: 1280px) {
   section.hero .container h1{
-    font-size: 40px;
+    font-size: 35px;
     padding-left: 35px;
   }
   section.hero .container h1::before{
@@ -1548,7 +1565,7 @@ body.pageFormulario {
     width: 187px;
   }
   section.hero .container .content img{
-    top: 51%;
+    top: 56%;
     width: 98.9%;
   }
   section.custom .pasos .paso .icon span{
@@ -1677,6 +1694,38 @@ body.pageFormulario {
   section.custom .contentMoto .part2 .item .inputSelect .cuerpo button:first-child.select::after{
     right: 18px;
   }
+  section.custom .contentMoto .part1 .peresentacionPaquete{
+    top: -25px; 
+    width: 91%;
+  }
+  @media (max-height: 750px) and (min-width: 1200px) {
+    section.hero .container button{
+      bottom: 55px;
+    }
+    section.hero .container .content img {
+      top: 59%;
+      width: 91.9%;
+    }    
+    section.custom .contentMoto .part1 .peresentacionPaquete {
+      width: 82%;
+    }
+    section.custom .contentMoto .part1 .peresentacionPaquete img {
+      margin-left: 46px;
+    }
+  }
+  @media (max-height: 680px) and (min-width: 1200px){
+    section.hero .container .content img {
+      top: 58%;
+      width: 88.9%;
+    }
+    section.custom .contentMoto .part1 .peresentacionPaquete img {
+      margin-left: 159px;
+    }
+    section.custom .contentMoto .part1 .peresentacionPaquete {
+      width: 69%;
+      top: -53px;
+    }
+  }
   /* end 1280 */
 }
 
@@ -1691,6 +1740,12 @@ body.pageFormulario {
   body.pageFormulario form button:hover,
   body.pageFormulario.gracias .contentFormulario a:hover{
     animation: none;
+  }
+  section.hero .container button{
+    bottom: 100px;
+  }
+  body.pageFormulario .contentFormulario{
+    padding: 50px 0;
   }
   /* end 1200 */
 }
@@ -2110,6 +2165,7 @@ body.pageFormulario {
   .elemento2,
   .elemento3,
   .elemento4{
+    display: none !important;
     img{
       width: 6.5px;
     }
@@ -2177,8 +2233,8 @@ body.pageFormulario {
     transition: 0.2s linear;
   }
   section.custom .contentMoto .part2 .continuar.aparece{
-    opacity: 1;
-    pointer-events: all;
+    opacity: 1 !important;
+    pointer-events: all !important;
   }
   section.custom .contentMoto .part2 .continuar button:hover, section.custom .contentMoto .part2 .continuar a:hover{
     animation: initial;
@@ -2217,9 +2273,12 @@ body.pageFormulario {
   body.pageFormulario form input, body.pageFormulario form select{
     margin-bottom: 25px;
   }
+  
   body.pageFormulario form .column{
-    flex-direction: column;
+    //flex-direction: column;
+    grid-column-gap: 20px;
   }
+  
   body.pageFormulario form .campoSelect::before{
     width: 10px;
     height: 12px;
@@ -2231,18 +2290,22 @@ body.pageFormulario {
   body.pageFormulario .resplandor{
     width: 797px;
   }
-  section.custom .contentMoto .marquee-info,
-  section.custom .contentMoto .marquee-info-cuero {
+  .marquee-info,
+  .marquee-info-cuero {
     display: block;
     background-color: #fff;
     position: relative;
-    margin-top: 15px;
+    //margin-top: 15px;
     span{
       color: #000;
       font-family: var(--font-sparpanch);
       font-size: 14px;
       font-weight: 800;
       line-height: 257.612%;
+    }
+    .js-marquee{
+      position: relative;
+      z-index: 2;
     }
     &::before{
       content: '';
@@ -2253,7 +2316,7 @@ body.pageFormulario {
       height: 100%;
       width: 150%;
       background-color: #fff;
-      z-index: -1;
+      z-index: 2;
     }
   }
   section.custom .contentMoto .part1 .cuero,
@@ -2333,7 +2396,65 @@ body.pageFormulario {
   section.custom .contentMoto .part2 .item .inputSelect.open .cabecera img.flecha{
     transform: translateY(-50%) rotate(180deg);
   }
-  
+  /*
+  section.hero .container .content{
+    transform: translateY(-50px);
+  }
+  section.hero .container button{
+    transform: translateY(-50px) translateX(-50%);
+  }
+  section.hero .pie{
+    transform: translate(-50%) translateY(-50px);
+  }
+  */
+  section.custom .pasos .paso p{
+    display: none;
+  }
+  section.custom .pasos .paso.select p{
+    display: block;
+  }
+  section.custom .contentMoto .part2 .eleccionPaquete,
+  section.custom .contentMoto .part2 .colorTanque{
+    border-bottom: none;
+  }
+  main{
+    padding-top: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  section.hero {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  section.custom{
+    padding-top: 100vh;
+    .header{
+      overflow: hidden;
+      padding-bottom: 0;
+      height: 113px;
+    }
+  }
+  .aos-init{
+    opacity: 1 !important;
+    transform: translate3d(0,0,0) !important;
+  }
+  section.custom .contentMoto .part2 .continuar{
+    opacity: 0 !important;
+    transform: translate3d(-50%,0,0) !important;
+  }
+  section.custom .pasos {
+    padding-top: 20px;
+  }
   /* end 500 */
 }
 
@@ -2370,6 +2491,9 @@ body.pageFormulario {
 }
 
 @media (max-width: 430px) {
+  section.custom .header {
+    height: 99px;
+  }
   body.pageFormulario .contentFormulario{
     padding: 40px 0;
   }
@@ -2421,6 +2545,9 @@ body.pageFormulario {
 }
 
 @media (max-width: 380px) {  
+  section.custom .header {
+    height: 80px;
+  }
   section.custom .contentMoto .part1 .precios{
     padding: 11.5px 23px;
     display: flex;
