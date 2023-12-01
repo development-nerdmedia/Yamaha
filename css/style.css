@@ -1399,7 +1399,8 @@ body.pageFormulario .sectionFormulario {
     bottom: 100px; }
   body.pageFormulario .contentFormulario {
     padding: 50px 0;
-    padding: 0; }
+    padding: 0;
+    transform: translateY(-33px); }
   /* end 1200 */ }
 
 @media (max-width: 1024px) {
