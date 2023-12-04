@@ -152,6 +152,7 @@ section.hero {
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: 1;
       img {
         top: 54.50%;
         position: absolute;
@@ -176,6 +177,7 @@ section.hero {
       grid-gap: 11px;
       cursor: pointer;
       padding: 17px 35px;
+      z-index: 3;
       &::before {
         position: absolute;
         z-index: -1;
@@ -1522,6 +1524,19 @@ body.pageFormulario .sectionFormulario{
   height: 100%;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #0F0F0F;
+}
+
 @media (max-width: 1600px){
   body.pageFormulario .sectionFormulario .huellas2 {
     right: 12px;
@@ -1725,6 +1740,15 @@ body.pageFormulario .sectionFormulario{
       width: 69%;
       top: -53px;
     }
+    section.custom .contentMoto .part2 .content{
+      margin-top: 13px;
+    }
+  }
+  body.pageFormulario .contentFormulario{
+    padding: 50px 0;
+  }
+  body.pageFormulario .contentFormulario p{
+    margin-top: 10px;
   }
   /* end 1280 */
 }
@@ -1746,8 +1770,8 @@ body.pageFormulario .sectionFormulario{
   }
   body.pageFormulario .contentFormulario{
     padding: 50px 0;
-    padding: 0;
-    transform: translateY(-33px);
+    //padding: 0;
+    //transform: translateY(-33px);
   }
   /* end 1200 */
 }
@@ -1935,6 +1959,41 @@ body.pageFormulario .sectionFormulario{
   }
   section.custom .contentMoto .part2 .item .inputSelect .cuerpo button{
     padding-right: 34px;
+  }
+  @media (max-height: 1000px) and (min-width: 768px){
+    section.hero .container .content{
+      transform: translateY(-60px);
+    }
+  }
+  section.custom.moto{
+    .header{
+      z-index: 3;
+    }
+  }
+  section.custom .pasos{
+    background-color: rgb(19, 19, 19);
+    z-index: 3;
+  }
+
+  section.custom .pasos::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 150%;
+    transform: translateX(-50%);
+    background-color: rgb(19, 19, 19);
+    height: 100%;
+  }
+  section.custom .pasos::before{
+    z-index: 1;
+  }
+  section.custom .pasos .content{
+    z-index: 1;
+    position: relative;
+  }
+  .header::before{
+    pointer-events: none;
   }
   /* end 900px */
 }
@@ -2419,6 +2478,7 @@ body.pageFormulario .sectionFormulario{
   section.custom .contentMoto .part2 .colorTanque{
     border-bottom: none;
   }
+  /*
   main{
     padding-top: 0;
     position: fixed;
@@ -2429,6 +2489,7 @@ body.pageFormulario .sectionFormulario{
     overflow-y: auto;
     overflow-x: hidden;
   }
+  */
   section.hero {
     height: 100vh;
     width: 100%;
@@ -2438,6 +2499,7 @@ body.pageFormulario .sectionFormulario{
     right: 0;
     bottom: 0;
   }
+  /*
   section.custom{
     padding-top: 100vh;
     .header{
@@ -2446,6 +2508,7 @@ body.pageFormulario .sectionFormulario{
       height: 113px;
     }
   }
+  */
   .aos-init{
     opacity: 1 !important;
     transform: translate3d(0,0,0) !important;
@@ -2456,6 +2519,25 @@ body.pageFormulario .sectionFormulario{
   }
   section.custom .pasos {
     padding-top: 20px;
+  }
+
+  section.hero .container .content{
+    transform: translateY(-45px);
+  }
+  section.hero{
+    height: auto;
+  }
+  section.hero .container button{
+    bottom: 75px;
+  }
+  .marquee-info.mostrar, .marquee-info-cuero.mostrar{
+    z-index: 1;
+  }
+  .header::before {
+    top: -33px;
+  }
+  section.custom.moto .header{
+    background-color: #131313;
   }
   /* end 500 */
 }
@@ -2542,6 +2624,9 @@ body.pageFormulario .sectionFormulario{
   }
   section.hero .container .menuHero {
     grid-gap: 23px;
+  }
+  section.custom .pasos{
+    padding-top: 15px;
   }
   /* end 425 */
 }
@@ -2636,6 +2721,12 @@ body.pageFormulario .sectionFormulario{
   body.pageFormulario .sectionFormulario .huellas1 {
     right: 26px;
     bottom: -64px;
+  }
+  .marquee-info span, .marquee-info-cuero span{
+    font-size: 12px !important;
+  }
+  section.custom .pasos {
+    padding-top: 13px;
   }
   /* end 380 */
 }

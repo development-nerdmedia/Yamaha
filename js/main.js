@@ -519,6 +519,32 @@ MyApp = {
                 }
             }
 
+            function validateNumbreDNI(e) {
+                if (document.getElementById("dni")) {
+                    const inputNumero = document.getElementById("dni");
+                    const minimoCaracteres = 8;
+                    if (inputNumero.value.length < minimoCaracteres) {
+                        inputNumero.classList.add("error");
+                        e.preventDefault();
+                    } else {
+                        inputNumero.classList.remove("error");
+                    }
+                }
+            }
+
+            function validateNumbreTelefono(e) {
+                if (document.getElementById("telefono")) {
+                    const inputNumero = document.getElementById("telefono");
+                    const minimoCaracteres = 8;
+                    if (inputNumero.value.length <= minimoCaracteres) {
+                        inputNumero.classList.add("error");
+                        e.preventDefault();
+                    } else {
+                        inputNumero.classList.remove("error");
+                    }
+                }
+            }
+
 
             function validateSelect(e) {
                 formespacioselect.forEach(function (select) {
@@ -559,6 +585,8 @@ MyApp = {
                     validateInput(e)
                     validateInputCorreo(e)
                     validateSelect(e)
+                    validateNumbreDNI(e)
+                    validateNumbreTelefono(e)
                 }
             })
         }
@@ -567,6 +595,7 @@ MyApp = {
         init: function () {
             const departamentoSelect = document.getElementById('departamento');
             const provinciaSelect = document.getElementById('provincia');
+            const distritoSelect = document.getElementById('distrito');
 
             departamentoSelect.addEventListener('change', function () {
                 const selectedDepartamento = departamentoSelect.value;
@@ -576,6 +605,15 @@ MyApp = {
                 }
             });
             provinciaSelect.options[0].style.display = 'block';
+
+            provinciaSelect.addEventListener('change', function () {
+                const selectedProvincia = provinciaSelect.value;
+                for (const option of distritoSelect.options) {
+                    option.style.display = (option.dataset.provincia === selectedProvincia) ? 'block' : 'none';
+                    distritoSelect.options[0].style.display = 'block';
+                }
+            });
+            distritoSelect.options[0].style.display = 'block';
 
 
 
@@ -653,15 +691,52 @@ MyApp = {
     },
     BtnContinuar: {
         init: function () {
-            window.addEventListener('scroll', function () {
+            /*
+            document.querySelector("main").addEventListener('scroll', function () {
                 var seccion = document.querySelector('.custom.moto');
+                var windowHeight = window.innerHeight;
                 var seccionRect = seccion.getBoundingClientRect();
-                if (seccionRect.top <= 0) {
+                var puntoMedioVertical = seccionRect.top + seccionRect.height / 2;
+                if (puntoMedioVertical <= windowHeight * 0.3) {
                     document.querySelector("section.custom .contentMoto .part2 .continuar").classList.add('aparece');
-                } else {
+                }else{
                     document.querySelector("section.custom .contentMoto .part2 .continuar").classList.remove('aparece');
                 }
             });
+            */
+            /*
+             window.addEventListener('scroll', function () {
+                 var seccion = document.querySelector('.custom.moto');
+                 var seccionRect = seccion.getBoundingClientRect();
+                 if (seccionRect.top <= 0) {
+                     document.querySelector("section.custom .contentMoto .part2 .continuar").classList.add('aparece');
+                 } else {
+                     document.querySelector("section.custom .contentMoto .part2 .continuar").classList.remove('aparece');
+                 }
+             });
+             */
+
+            var $motoSection = $(".custom.moto");
+            var $continuarElement = $("section.custom .contentMoto .part2 .continuar");
+
+            $(window).on("scroll", function () {
+                var windowHeight = $(window).height();
+                var scrollPos = $(window).scrollTop();
+                var sectionPos = $motoSection.offset().top;
+                var sectionHeight = $motoSection.outerHeight();
+
+                // Calcula la posición de la mitad de la pantalla
+                var middleScreen = windowHeight / 4;
+
+                // Verifica si la mitad de la sección está en la mitad de la pantalla
+                if (scrollPos + middleScreen > sectionPos && scrollPos + middleScreen < sectionPos + sectionHeight) {
+                    $continuarElement.addClass("aparece");
+                } else {
+                    $continuarElement.removeClass("aparece");
+                }
+            });
+
+
         }
     },
     MenuFixed: {
@@ -669,6 +744,55 @@ MyApp = {
 
         }
     },
+    animacionContentHome: {
+        init: function () {
+            if (window.innerWidth > 1200) {
+                const scrollElement = document.querySelector('section.hero .container .content');
+                window.addEventListener('scroll', function () {
+                    const scrollPosition = window.scrollY;
+                    const translateXValue = scrollPosition * 0.1; // Mover el 10% del scroll
+                    scrollElement.style.transform = `translateX(${translateXValue}px)`;
+                });
+            }
+        }
+    },
+    headerFixed: {
+        init: function () {
+            if (901 > window.innerWidth) {
+                $(".custom.moto .header").stick_in_parent({
+                    offset_top: 0,
+                    offset_right: 52,
+                });
+                if (380 >= window.innerWidth) {
+                    $("section.custom .pasos").stick_in_parent({
+                        offset_top: 80,
+                        offset_right: 52,
+                    });  
+                } else if (430 >= window.innerWidth) {
+                    $("section.custom .pasos").stick_in_parent({
+                        offset_top: 98,
+                        offset_right: 52,
+                    }); 
+                } else if (500 >= window.innerWidth) {
+                    $("section.custom .pasos").stick_in_parent({
+                        offset_top: 90,
+                        offset_right: 52,
+                    }); 
+                }
+                else if (692 > window.innerWidth) {
+                    $("section.custom .pasos").stick_in_parent({
+                        offset_top: 93,
+                        offset_right: 52,
+                    }); 
+                } else if (window.innerWidth >= 692) {
+                    $("section.custom .pasos").stick_in_parent({
+                        offset_top: 100,
+                        offset_right: 52,
+                    });
+                }
+            }
+        }
+    }
 }
 
 if ($('.custom.moto').length > 0) {
@@ -697,4 +821,16 @@ if ($('section.custom .contentMoto .part2 .continuar').length > 0) {
 
 if ($('section.custom .pasos').length > 0) {
     MyApp.MenuFixed.init();
+}
+
+if ($('section.hero .container .content').length > 0) {
+    MyApp.animacionContentHome.init();
+}
+
+if ($('section.hero .container .content').length > 0) {
+    MyApp.animacionContentHome.init();
+}
+
+if ($('section.custom.moto .header').length > 0) {
+    MyApp.headerFixed.init();
 }
